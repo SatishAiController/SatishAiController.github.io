@@ -467,11 +467,19 @@
   function closeModal(id){ document.getElementById(id).classList.remove('show'); }
   function scrollTo_(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-  function signInWithGoogle(){
+   function signInWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).then(res=>{
-      const mobile = document.getElementById('mobileInput').value;
-      if(mobile) sessionStorage.setItem('zyra_mobile', mobile);
+      const mobile = document.getElementById('mobileInput').value.trim();
+      if(mobile && !/^[6-9]\d{9}$/.test(mobile)){
+        alert('Please enter a valid 10-digit Indian mobile number.');
+        sessionStorage.removeItem('zyra_mobile_' + res.user.email);
+      } else if(mobile){
+        sessionStorage.setItem('zyra_mobile_' + res.user.email, mobile);
+      } else {
+        sessionStorage.removeItem('zyra_mobile_' + res.user.email);
+      }
+      document.getElementById('mobileInput').value = '';
       closeModal('loginModal');
     }).catch(err=>{
       alert('Sign-in failed: ' + err.message);
