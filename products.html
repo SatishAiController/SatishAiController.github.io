@@ -530,8 +530,9 @@ Amount: ₹${plan.amount}
 Order ID: ${paymentId}
 Email: ${currentUser.email}
 Mobile: ${mobile}`;
-    const tgUrl = `https://t.me/satishai21?text=${encodeURIComponent(msgText)}`;
+       const tgUrl = `https://t.me/satishai21?text=${encodeURIComponent(msgText)}`;
     document.getElementById('telegramSendBtn').onclick = ()=> window.open(tgUrl, '_blank');
+    try { window.open(tgUrl, '_blank'); } catch(e) {}
     notifySellerBot(msgText);
     document.getElementById('successModal').classList.add('show');
   }
