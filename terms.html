@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms, Policies & FAQ — SatishAiController (SAC)</title>
+<meta name="description" content="Full Terms of Service, Refund Policy, Privacy Policy, Licence Agreement and FAQ for all SatishAiController (SAC) digital products, including ZYRA AI Voice Assistant.">
+<link rel="canonical" href="https://satishaicontroller151.github.io/terms.html">
+<link rel="icon" type="image/png" href="sac-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060714; --bg2:#0b0f26; --panel:#0e1330; --panel2:#131938;
+    --border:rgba(139,150,214,0.16); --border-soft:rgba(139,150,214,0.08);
+    --cyan:#2ee6ff; --magenta:#ff3da8; --violet:#8b5cff; --mint:#37ffb4;
+    --text:#eceffd; --muted:#8791c4; --muted2:#5d6699;
+    --display:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:var(--body); overflow-x:hidden; position:relative;}
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 800px 500px at 15% -10%, rgba(139,92,255,0.20), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(46,230,255,0.14), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 50% 100%, rgba(255,61,168,0.10), transparent 60%);
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(16px); background:rgba(6,7,20,0.72); border-bottom:1px solid var(--border-soft);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:72px; max-width:1180px;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--display); font-weight:700; font-size:17px;}
+  .brand img{width:34px;height:34px;border-radius:9px;}
+  .brand .sac{font-family:var(--mono); font-size:11px; color:var(--cyan); border:1px solid rgba(46,230,255,0.3); padding:2px 7px; border-radius:6px; letter-spacing:1px;}
+  .back-btn{font-family:var(--body); font-weight:600; font-size:14px; cursor:pointer; border:1px solid var(--border); border-radius:10px; padding:10px 18px; background:transparent; color:var(--text); text-decoration:none; transition:border-color .2s,color .2s;}
+  .back-btn:hover{border-color:var(--cyan); color:var(--cyan);}
+
+  .page-head{padding:70px 0 40px; text-align:center;}
+  .page-head .eyebrow{font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px;}
+  .page-head h1{font-family:var(--display); font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-0.4px;}
+  .page-head p{color:var(--muted); margin-top:14px; font-size:14.5px;}
+  .updated{font-family:var(--mono); font-size:12px; color:var(--muted2); margin-top:10px;}
+
+  .toc{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:0 0 50px;}
+  .toc a{font-size:12.5px; color:var(--muted); text-decoration:none; border:1px solid var(--border); padding:7px 14px; border-radius:100px; transition:all .2s;}
+  .toc a:hover{color:var(--cyan); border-color:var(--cyan);}
+
+  section{margin-bottom:54px; scroll-margin-top:90px;}
+  section h2{font-family:var(--display); font-size:22px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:12px;}
+  section h2 .n{font-family:var(--mono); font-size:13px; color:transparent; -webkit-text-stroke:1px var(--violet);}
+  section h3{font-family:var(--display); font-size:15.5px; font-weight:600; margin:22px 0 8px; color:var(--text);}
+  section p, section li{color:var(--muted); font-size:14px; line-height:1.75;}
+  section ul{margin:8px 0 0 20px;}
+  section li{margin-bottom:7px;}
+  .divider{height:1px; background:var(--border-soft); margin:34px 0;}
+  .callout{background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--cyan); border-radius:12px; padding:16px 20px; margin:18px 0;}
+  .callout p{color:var(--text); font-size:13.5px;}
+  b{color:var(--text);}
+  a{color:var(--cyan);}
+
+  .faq-item{background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:11px;}
+  .faq-head{padding:17px 20px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:var(--display); font-weight:600; font-size:14.5px; gap:14px;}
+  .faq-head .chev{color:var(--cyan); transition:transform .25s; flex-shrink:0;}
+  .faq-item.open .chev{transform:rotate(45deg);}
+  .faq-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-body-in{padding:0 20px 18px; color:var(--muted); font-size:13.5px; line-height:1.7;}
+
+  footer{border-top:1px solid var(--border-soft); padding:36px 0; margin-top:40px;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; max-width:1180px;}
+  footer p{color:var(--muted2); font-size:13px;}
+  ::selection{background:var(--violet); color:#fff;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" style="text-decoration:none;color:inherit;"><div class="brand"><img src="sac-logo.png" alt="SAC"><span>SatishAiController</span><span class="sac">SAC</span></div></a>
+    <div style="display:flex;gap:10px;align-items:center;"><a href="products.html" class="back-btn">Products</a><a href="index.html" class="back-btn">← Home</a></div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Legal Centre</div>
+    <h1>Terms, Policies &amp; FAQ</h1>
+    <p>Everything that governs your purchase and use of SatishAiController (SAC) products.</p>
+    <div class="updated">Last updated: September 2026</div>
+  </div>
+
+  <div class="toc">
+    <a href="#terms">Terms of Service</a>
+    <a href="#licence">Licence Agreement</a>
+    <a href="#payment">Payment &amp; Delivery</a>
+    <a href="#refund">Refund Policy</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#acceptable">Acceptable Use</a>
+    <a href="#liability">Liability &amp; Warranty</a>
+    <a href="#products">Product-specific Terms</a>
+    <a href="#webdev">Website Development</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <section id="terms">
+    <h2><span class="n">01</span> Terms of Service</h2>
+    <p>These Terms govern your access to and use of the website <b>satishaicontroller151.github.io</b> and all digital products, software and services offered by <b>SatishAiController ("SAC", "we", "us")</b>, operated by Satish. By purchasing, downloading, installing or using any SAC product, you agree to be bound by these Terms.</p>
+
+    <h3>1.1 Eligibility</h3>
+    <p>You must be at least 18 years old, or have the consent of a parent or legal guardian, to make a purchase. By placing an order you confirm that the information you provide (email address, mobile number) is accurate and belongs to you.</p>
+
+    <h3>1.2 Account &amp; verification</h3>
+    <p>Purchases require sign-in with a valid Google account. Your email is verified before an order is processed. You are responsible for keeping access to that account secure; orders and licence keys are tied to the email used at the time of purchase.</p>
+
+    <h3>1.3 Changes to these Terms</h3>
+    <p>We may update these Terms as our products evolve. The "Last updated" date above will change accordingly. Continued use of our products after an update constitutes acceptance of the revised Terms.</p>
+
+    <h3>1.4 Products covered</h3>
+    <p>These Terms apply to <b>all current and future SAC products</b> — desktop software, mobile applications, activation keys and any other digital goods released under the SatishAiController brand. Where a specific product has additional or different terms, those are listed in section 8 (Product-specific Terms) and take precedence for that product only.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="licence">
+    <h2><span class="n">02</span> Licence Agreement</h2>
+    <p>When you purchase a SAC product, you are not buying ownership of the software. You are buying a limited licence to use it under the conditions below.</p>
+
+    <h3>2.1 What your licence grants</h3>
+    <ul>
+      <li>A personal, non-exclusive, non-transferable licence to install and run the software.</li>
+      <li>Use on <b>one device</b> per activation key purchased.</li>
+      <li>Lifetime access to the version you purchased — no recurring fee, no renewal.</li>
+      <li>Access to updates we publish for that product, at our discretion.</li>
+    </ul>
+
+    <h3>2.2 What your licence does not permit</h3>
+    <ul>
+      <li>Sharing, reselling, renting, sub-licensing or redistributing the software or your activation key.</li>
+      <li>Uploading the software or key to any public repository, file-sharing site, group or marketplace.</li>
+      <li>Reverse-engineering, decompiling, or attempting to extract source code from the compiled application.</li>
+      <li>Removing, altering or obscuring any branding, copyright notice or licence check.</li>
+      <li>Using a single key across multiple devices, or attempting to bypass device binding.</li>
+    </ul>
+
+    <div class="callout">
+      <p><b>Device binding:</b> Each activation key locks to the first device it is activated on. If the same key is later used on a different device, activation will be refused. Keys found being shared may be deactivated without refund.</p>
+    </div>
+
+    <h3>2.3 Transfers and re-activation</h3>
+    <p>If you change or reset your computer, contact us on Telegram with your original order ID. We will review genuine cases and may release the key for re-activation. This is offered as a courtesy, not as an entitlement, and is limited to reasonable use.</p>
+
+    <h3>2.4 Termination</h3>
+    <p>Your licence terminates automatically if you breach these Terms. On termination you must stop using and delete all copies of the software. No refund is due for a licence terminated due to breach.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="payment">
+    <h2><span class="n">03</span> Payment &amp; Delivery</h2>
+
+    <h3>3.1 Pricing and currency</h3>
+    <p>All prices are listed in Indian Rupees (INR) and are inclusive of applicable charges unless stated otherwise. Prices may change at any time; the price shown at the moment of purchase is the price that applies to your order.</p>
+
+    <h3>3.2 Payment processing</h3>
+    <p>Payments are processed securely by <b>Razorpay</b>. We do not see, collect or store your card number, UPI PIN, CVV, or banking credentials at any point. Razorpay's own terms and privacy policy apply to the payment transaction.</p>
+
+    <h3>3.3 Order confirmation</h3>
+    <p>After a successful payment you receive a unique <b>Order ID</b> on screen. This ID is your proof of purchase. Please save it — delivery cannot be processed without it.</p>
+
+    <h3>3.4 Delivery method and timeline</h3>
+    <ul>
+      <li>Delivery is made manually over <b>Telegram</b> after we verify your payment.</li>
+      <li>Send your Order ID to <b>@satishai21</b> using the button shown after payment.</li>
+      <li>Orders are delivered within <b>48 hours</b> of a verified payment, usually much sooner.</li>
+      <li>If 48 hours pass with no delivery, message again with your Order ID before opening a dispute.</li>
+    </ul>
+
+    <div class="callout">
+      <p><b>Important:</b> Delivery only begins once you send your Order ID on Telegram. We cannot identify your purchase automatically without it.</p>
+    </div>
+
+    <h3>3.5 Failed or duplicate payments</h3>
+    <p>If money is debited but the payment fails, it is normally reversed by your bank or Razorpay within 5–7 working days. Duplicate payments for the same order are refunded in full once verified.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="refund">
+    <h2><span class="n">04</span> Refund &amp; Cancellation Policy</h2>
+    <p>Our products are digital goods delivered electronically. Once delivered, they cannot be returned, which is why the policy below is specific.</p>
+
+    <h3>4.1 When a refund is granted</h3>
+    <ul>
+      <li>We fail to deliver within 48 hours of a verified payment and do not respond to your follow-up.</li>
+      <li>You were charged twice for the same order.</li>
+      <li>The product is fundamentally non-functional on a supported system and we are unable to resolve it after reasonable support attempts.</li>
+    </ul>
+
+    <h3>4.2 When a refund is not granted</h3>
+    <ul>
+      <li>After the file or activation key has been delivered and used.</li>
+      <li>Change of mind, or the product not matching an expectation that was never advertised.</li>
+      <li>Your hardware, operating system or internet connection does not meet the stated requirements.</li>
+      <li>Third-party service failures outside our control (for example Google Gemini API downtime or quota limits).</li>
+      <li>Breach of the licence terms, including key sharing or redistribution.</li>
+    </ul>
+
+    <h3>4.3 How to request a refund</h3>
+    <p>Message <b>@satishai21</b> on Telegram with your Order ID, the email used at purchase, and a clear description of the issue. Approved refunds are returned to the original payment method within 5–10 working days.</p>
+
+    <h3>4.4 Cancellation</h3>
+    <p>Orders can be cancelled for a full refund at any point <b>before</b> the product has been delivered to you.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="privacy">
+    <h2><span class="n">05</span> Privacy Policy</h2>
+
+    <h3>5.1 What we collect</h3>
+    <ul>
+      <li><b>Email address</b> — via Google Sign-in, to identify your order and deliver your product.</li>
+      <li><b>Mobile number</b> — optional, provided by you for delivery contact only.</li>
+      <li><b>Order ID and purchase details</b> — item purchased, amount, and date.</li>
+      <li><b>Activation record</b> — the key issued and an anonymous device identifier generated on your machine.</li>
+    </ul>
+
+    <h3>5.2 What we never collect</h3>
+    <ul>
+      <li>Card numbers, UPI PINs, CVV or any banking credentials.</li>
+      <li>Your Google account password.</li>
+      <li>Your personal Gemini API key — it stays on your own computer.</li>
+      <li>The contents of your screen, microphone, camera or files. The software processes these locally on your device and sends them only to Google's Gemini API under your own API key, never to us.</li>
+    </ul>
+
+    <div class="callout">
+      <p><b>Plainly:</b> we can see that you bought something and which key we issued you. We cannot see what you do inside the software.</p>
+    </div>
+
+    <h3>5.3 How your data is used</h3>
+    <p>Solely to verify your purchase, issue and validate your licence key, deliver your product, and provide support. We do not sell, rent or share your data with advertisers or any third party for marketing.</p>
+
+    <h3>5.4 Where your data is stored</h3>
+    <p>Order and licence records are stored in <b>Google Firebase</b>, secured by access rules that prevent public listing or modification. Payment records are held by Razorpay under their own security standards.</p>
+
+    <h3>5.5 Third-party services</h3>
+    <p>Our products and website rely on: Google Firebase (authentication and database), Razorpay (payments), Google Gemini API (AI processing, using your own key), EmailJS (verification emails) and Telegram (delivery and support). Each operates under its own privacy policy.</p>
+
+    <h3>5.6 Your rights</h3>
+    <p>You may request a copy of the data we hold about you, or ask us to delete it, by contacting us on Telegram or by email. Note that deleting your purchase record may also invalidate your licence key.</p>
+
+    <h3>5.7 Cookies and tracking</h3>
+    <p>This website does not use advertising or tracking cookies. Browser storage is used only to remember your sign-in session and your entered mobile number during checkout.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="acceptable">
+    <h2><span class="n">06</span> Acceptable Use</h2>
+    <p>SAC software can control applications, read the screen and automate actions on your computer. You agree to use it lawfully and responsibly.</p>
+    <p>You must not use any SAC product to:</p>
+    <ul>
+      <li>Access, monitor or control a computer you do not own or are not authorised to use.</li>
+      <li>Record, capture or transmit another person's data, screen or conversation without their knowledge and consent.</li>
+      <li>Commit fraud, harassment, impersonation, or any criminal activity.</li>
+      <li>Bypass security controls, licensing systems or access restrictions of any software or service.</li>
+      <li>Generate or distribute unlawful, abusive or harmful content.</li>
+    </ul>
+    <p>You are solely responsible for how you use the software and for the actions it performs on your instruction. Violations may result in immediate licence termination without refund.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="liability">
+    <h2><span class="n">07</span> Liability, Warranty &amp; Support</h2>
+
+    <h3>7.1 Provided "as is"</h3>
+    <p>SAC products are provided on an "as is" and "as available" basis, without warranties of any kind, express or implied, including fitness for a particular purpose. AI-generated output can be inaccurate or unexpected; always review important actions before relying on them.</p>
+
+    <h3>7.2 Limitation of liability</h3>
+    <p>To the maximum extent permitted by law, SatishAiController shall not be liable for any indirect, incidental or consequential damages, including data loss, business interruption or lost profits, arising from the use or inability to use our products. Our total liability for any claim is limited to the amount you actually paid for the product.</p>
+
+    <h3>7.3 Third-party dependency</h3>
+    <p>Our software depends on Google's Gemini API. Availability, rate limits, model changes, pricing and deprecations on Google's side are entirely outside our control and are not grounds for a refund.</p>
+
+    <h3>7.4 System requirements</h3>
+    <p>Windows 10 or 11, a working microphone, and an active internet connection. Performance may vary with hardware. Please confirm compatibility before purchase.</p>
+
+    <h3>7.5 Support</h3>
+    <p>Support is provided on a best-effort basis via Telegram at <b>@satishai21</b>. We aim to respond within 48 hours. Support covers installation, activation and product defects — it does not include training, custom development, or issues caused by unsupported modifications.</p>
+
+    <h3>7.6 Updates</h3>
+    <p>Updates are published at our discretion and may add, change or remove features. Using the in-app update check is optional; you are not required to update.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="products">
+    <h2><span class="n">08</span> Product-specific Terms</h2>
+    <p>The clauses above apply to every SAC product. This section lists anything extra that applies to an individual product. As new products launch, each gets its own entry here.</p>
+
+    <h3>8.1 ZYRA — AI Voice Assistant (Windows)</h3>
+    <ul>
+      <li><b>Platform:</b> Windows 10 and 11 only. A microphone and an active internet connection are required.</li>
+      <li><b>Your own API key:</b> ZYRA connects to Google's Gemini API using a free API key that you generate and enter yourself. The key stays on your machine; we never receive or store it. All Gemini usage limits, downtime and pricing are set by Google.</li>
+      <li><b>System access:</b> ZYRA can open applications, read the screen when you enable screen sharing, and automate actions on your instruction. You are responsible for the actions you ask it to perform.</li>
+      <li><b>Nothing reaches us:</b> audio, screen frames and camera frames are processed locally and sent only to Google's Gemini API under your own key. They are never transmitted to SatishAiController.</li>
+      <li><b>Licence:</b> one activation key unlocks one device for life. The key binds to the first device it activates on.</li>
+      <li><b>AI accuracy:</b> ZYRA is an AI assistant and can misinterpret commands or produce incorrect output. Review any important or irreversible action before confirming it.</li>
+    </ul>
+
+    <h3>8.2 Future products</h3>
+    <p>Mobile applications and additional desktop tools are in development. When released, each will be listed here with its own platform requirements, licence scope and any specific conditions. Until a product appears in this section, no product-specific terms exist for it beyond the general Terms above.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="webdev">
+    <h2><span class="n">09</span> Website Development Services</h2>
+    <p>In addition to software products, SAC offers custom website development. The following applies to those engagements.</p>
+    <ul>
+      <li><b>Quotation:</b> every project is quoted individually after discussing scope, features and timeline over Telegram.</li>
+      <li><b>Payment:</b> typically an advance to begin work, with the balance due on delivery. Exact terms are agreed in writing before work starts.</li>
+      <li><b>Timeline:</b> estimated delivery is 7–14 days for standard projects, depending on scope and how quickly content and feedback are provided.</li>
+      <li><b>Revisions:</b> a reasonable number of revision rounds is included, as agreed in the quote. Changes beyond the agreed scope are quoted separately.</li>
+      <li><b>Ownership:</b> on full and final payment, the delivered website code and assets are yours.</li>
+      <li><b>Third-party costs:</b> domain, hosting, paid plugins, stock media or API charges are borne by the client unless explicitly included in the quote.</li>
+      <li><b>Cancellation:</b> if a project is cancelled after work has begun, advance payments cover the work completed to that point and are non-refundable.</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="faq">
+    <h2><span class="n">10</span> Frequently Asked Questions</h2>
+
+    <div class="faq-item"><div class="faq-head">How long does delivery take? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Up to 48 hours after we verify your payment, and usually far quicker. Delivery starts once you send your Order ID to @satishai21 on Telegram using the button shown after checkout.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Why is delivery manual and not instant? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Every order is verified by hand before the file and key are issued. This keeps the product from being scraped or resold automatically, and means you always have a real person to talk to if something goes wrong.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">What is the difference between the app, the key, and the bundle? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">The app is the ZYRA program itself. The activation key unlocks its full features on one device. The bundle is both together at a reduced price — that is what most people need if they are starting fresh.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Do I need my own Gemini API key? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Yes. Get one free from aistudio.google.com/app/apikey and paste it into ZYRA on first run. It stays on your computer — we never see or store it. Any usage limits on that key are set by Google, not by us.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Can I use one key on two computers? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">No. Each key binds to the first device it activates on. If you have genuinely changed or reset your machine, message us with your Order ID and we will review it.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Does ZYRA record my screen or my voice? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Nothing is sent to us. Audio and screen frames are processed on your computer and sent directly to Google's Gemini API using your own API key, only while you have the feature switched on.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">What are the system requirements? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Windows 10 or 11, a microphone, and an internet connection. Headphones are strongly recommended — they stop ZYRA from hearing its own voice through the mic, which makes conversations far smoother.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Do I get future updates? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Yes. ZYRA has a built-in update check. When a new version is published you will be told, and you can download it from this site. There is no extra charge.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Is it a subscription? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">No. Every purchase is one-time. There is no recurring charge, no renewal and no auto-debit of any kind.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Can I get a refund? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Before delivery, yes — full refund. After delivery, refunds are limited to the specific cases in section 4, because a digital file cannot be returned once it is in your hands.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Is my payment secure? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">Payments run through Razorpay. Your card, UPI and banking details go to them directly — they never pass through our website and we never store them.</div></div></div>
+
+    <div class="faq-item"><div class="faq-head">Can I resell the software? <span class="chev">+</span></div>
+      <div class="faq-body"><div class="faq-body-in">No. The licence is personal and non-transferable. Reselling or redistributing it breaches the licence and will result in the key being deactivated.</div></div></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact">
+    <h2><span class="n">11</span> Contact &amp; Grievance</h2>
+    <p>For any question, complaint or request relating to these Terms, your order, or your data:</p>
+    <ul>
+      <li><b>Telegram (fastest):</b> <a href="https://t.me/satishai21" target="_blank">@satishai21</a></li>
+      <li><b>Email:</b> <a href="mailto:funnyads.in@gmail.com">funnyads.in@gmail.com</a></li>
+      <li><b>Facebook:</b> <a href="https://www.facebook.com/SatishToriyahiVlog" target="_blank">SatishAiController updates</a></li>
+    </ul>
+    <p style="margin-top:14px;">We aim to acknowledge every message within 48 hours. Please always include your Order ID where relevant — it lets us find your purchase immediately.</p>
+    <p style="margin-top:14px;"><b>Governing law:</b> These Terms are governed by the laws of India. Any dispute shall be subject to the jurisdiction of the courts of Jharkhand, India.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:14px;"><img src="sac-logo.png" alt="SAC" style="width:26px;height:26px;">SatishAiController</div>
+    <p>© 2026 SatishAiController (SAC) · All rights reserved</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-head').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const item = head.parentElement;
+      const body = item.querySelector('.faq-body');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{
+        i.classList.remove('open');
+        i.querySelector('.faq-body').style.maxHeight = null;
+      });
+      if(!isOpen){ item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 40 + 'px'; }
+    });
+  });
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F12') e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
+    if (e.ctrlKey && e.key.toUpperCase() === 'U') e.preventDefault();
+  });
+</script>
+</body>
+</html>
