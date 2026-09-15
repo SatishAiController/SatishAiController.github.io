@@ -523,7 +523,7 @@
       currency: "INR",
       name: "SatishAiController",
       description: plan.label,
-      prefill: { email: currentUser.email, contact: sessionStorage.getItem('zyra_mobile')||'' },
+      prefill: { email: currentUser.email, contact: sessionStorage.getItem('zyra_mobile_' + currentUser.email)||'' },
       theme: { color: "#2ee6ff" },
       handler: function(response){
         showSuccess(response.razorpay_payment_id, plan);
@@ -536,7 +536,7 @@
   function showSuccess(paymentId, plan){
     closeModal('payModal');
     document.getElementById('orderIdBox').textContent = paymentId;
-    const mobile = sessionStorage.getItem('zyra_mobile') || 'not provided';
+    const mobile = sessionStorage.getItem('zyra_mobile_' + currentUser.email) || 'not provided';
     const msgText =
 `New SAC order
 Item: ${plan.label}
