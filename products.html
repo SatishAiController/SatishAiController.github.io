@@ -442,8 +442,13 @@
     bundle: { label: "ZYRA app + activation key", amount: 229 }
   };
 
+    let authReady = false;
+  let resolveAuthReady;
+  const authReadyPromise = new Promise(r => resolveAuthReady = r);
   auth.onAuthStateChanged(user=>{
     currentUser = user;
+    authReady = true;
+    resolveAuthReady();
     const chip = document.getElementById('navUserChip');
     const loginBtn = document.getElementById('navLoginBtn');
     if(user){
@@ -473,8 +478,9 @@
     });
   }
 
-  function startCheckout(plan){
+    async function startCheckout(plan){
     pendingPlan = plan;
+    if(!authReady) await authReadyPromise;
     if(!currentUser){ openLogin(); return; }
     openPayModal();
   }
