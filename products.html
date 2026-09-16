@@ -484,9 +484,11 @@
       }
       document.getElementById('mobileInput').value = '';
       closeModal('loginModal');
-    }).catch(err=>{
-      alert('Sign-in failed: ' + err.message);
-    });
+        }).catch(err=>{
+      if(err.code !== 'auth/cancelled-popup-request'){
+        alert('Sign-in failed: ' + err.message);
+      }
+    }).finally(()=>{ signInInProgress = false; });
   }
 
     async function startCheckout(plan){
