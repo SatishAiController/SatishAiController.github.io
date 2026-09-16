@@ -467,7 +467,10 @@
   function closeModal(id){ document.getElementById(id).classList.remove('show'); }
   function scrollTo_(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-   function signInWithGoogle(){
+     let signInInProgress = false;
+  function signInWithGoogle(){
+    if(signInInProgress) return;
+    signInInProgress = true;
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).then(res=>{
       const mobile = document.getElementById('mobileInput').value.trim();
