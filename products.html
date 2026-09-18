@@ -14,13 +14,20 @@
 <link rel="icon" type="image/png" href="sac-logo.png">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"SoftwareApplication",
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
   "name":"ZYRA AI Voice Assistant",
   "operatingSystem":"Windows 10, Windows 11",
-    firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
-  "creator":{"@type":"Organization","name":"SatishAiController"}
+  "applicationCategory":"UtilitiesApplication",
+  "offers":{
+    "@type":"Offer",
+    "price":"49",
+    "priceCurrency":"INR"
+  },
+  "creator":{
+    "@type":"Organization",
+    "name":"SatishAiController"
+  }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
