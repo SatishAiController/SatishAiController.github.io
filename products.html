@@ -462,17 +462,24 @@
     currentUser = user;
     authReady = true;
     resolveAuthReady();
-    const chip = document.getElementById('navUserChip');
+        const chip = document.getElementById('navUserChip');
     const loginBtn = document.getElementById('navLoginBtn');
+    const avatarBtn = document.getElementById('avatarBtn');
     if(user){
       chip.style.display = 'flex';
-      chip.innerHTML = `<img src="${user.photoURL||''}" onerror="this.style.display='none'"> ${user.email}`;
-      loginBtn.textContent = 'Sign out';
-      loginBtn.onclick = ()=> auth.signOut();
+      loginBtn.style.display = 'none';
+      const letter = user.email.charAt(0).toUpperCase();
+      if(user.photoURL){
+        avatarBtn.innerHTML = `<img src="${user.photoURL}" onerror="this.parentElement.textContent='${letter}'">`;
+      } else {
+        avatarBtn.textContent = letter;
+      }
+      document.getElementById('avatarEmail').textContent = user.email;
     } else {
       chip.style.display = 'none';
-      loginBtn.textContent = 'Sign in';
-      loginBtn.onclick = openLogin;
+      loginBtn.style.display = 'inline-block';
+      document.getElementById('avatarMenu').classList.remove('show');
+    }
     }
   });
 
