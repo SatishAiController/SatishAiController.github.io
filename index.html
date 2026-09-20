@@ -258,9 +258,27 @@
       <a href="terms.html">Legal &amp; FAQ</a>
       <a href="#contact">Contact</a>
     </div>
-    <div class="nav-cta"><a href="products.html" class="btn btn-primary">Browse products</a></div>
+        <div class="nav-cta">
+      <div id="navUserChip">
+        <div class="avatar-btn" id="avatarBtn" onclick="toggleAvatarMenu()"></div>
+        <div class="avatar-menu" id="avatarMenu">
+          <div class="em" id="avatarEmail"></div>
+          <button onclick="auth.signOut()">Sign out</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openLogin()" id="navLoginBtn">Sign in</button>
+    </div>
   </div>
 </nav>
+
+<div class="modal-bg" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h3>Sign in</h3>
+    <p class="modal-sub">We use Google Sign-in to verify your Gmail — quick and secure, no password needed.</p>
+    <button class="btn btn-primary" style="width:100%;" onclick="signInWithGoogle()">Continue with Google</button>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap">
