@@ -410,6 +410,26 @@
 </footer>
 
 <script defer>
+    // BOOT SCREEN — must run before Firebase code
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      const boot = document.getElementById('boot');
+
+      if (boot) {
+        boot.classList.add('done');
+      }
+
+      if (localStorage.getItem('sac_agreed') === 'yes') {
+        document.body.classList.remove('locked');
+      } else {
+        const gate = document.getElementById('gate');
+
+        if (gate) {
+          gate.classList.add('show');
+        }
+      }
+    }, 1400);
+  });
   const firebaseConfig = {
     apiKey: "AIzaSyBH4_Lv1wwFZRyfdiSDu0TI6gkHcKpRIiY",
     authDomain: "zair-d011d.firebaseapp.com",
