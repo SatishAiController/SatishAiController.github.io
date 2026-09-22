@@ -469,16 +469,28 @@
     }
   });
 
-  window.addEventListener('load', ()=>{
-    setTimeout(()=>{
-      document.getElementById('boot').classList.add('done');
-      if(localStorage.getItem('sac_agreed') === 'yes'){
-        document.body.classList.remove('locked');
-      } else {
-        document.getElementById('gate').classList.add('show');
-      }
-    }, 1400);
-  });
+  function finishBoot() {
+  const boot = document.getElementById('boot');
+
+  if (boot) {
+    boot.classList.add('done');
+  }
+
+  if (localStorage.getItem('sac_agreed') === 'yes') {
+    document.body.classList.remove('locked');
+  } else {
+    const gate = document.getElementById('gate');
+
+    if (gate) {
+      gate.classList.add('show');
+    }
+  }
+}
+
+setTimeout(finishBoot, 1400);
+
+// Safety fallback
+setTimeout(finishBoot, 3000);
   function acceptGate(){
     localStorage.setItem('sac_agreed','yes');
     document.getElementById('gate').classList.remove('show');
