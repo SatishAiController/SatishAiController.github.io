@@ -62,7 +62,7 @@
 
   /* GATE */
   #gate{position:fixed; inset:0; z-index:380; display:none; align-items:center; justify-content:center; padding:22px; background:rgba(4,5,14,0.86); backdrop-filter:blur(10px);}
-  #gate.show{display:flex; animation:fadeIn .5s ease;}
+  #gate.show{display:none !important;}
   @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
   .gate-card{width:100%; max-width:470px; background:linear-gradient(170deg,var(--bg2),var(--panel)); border:1px solid var(--border); border-radius:24px; padding:38px 32px; text-align:center; box-shadow:0 40px 110px rgba(0,0,0,0.7); position:relative; overflow:hidden; animation:rise .6s cubic-bezier(.2,.9,.3,1.2); max-height:92vh; overflow-y:auto;}
   @keyframes rise{from{transform:translateY(34px) scale(.95); opacity:0;}to{transform:none; opacity:1;}}
@@ -223,7 +223,7 @@
   ::selection{background:var(--violet); color:#fff;}
 </style>
 </head>
-<body class="locked">
+<body>
 
 <div id="boot">
   <img src="sac-logo.png" alt="SatishAiController" class="boot-logo">
@@ -262,8 +262,9 @@
       <div id="navUserChip">
         <div class="avatar-btn" id="avatarBtn" onclick="toggleAvatarMenu()"></div>
         <div class="avatar-menu" id="avatarMenu">
-          <div class="em" id="avatarEmail"></div>
-          <button onclick="auth.signOut()">Sign out</button>
+          <div class="em" id="avatarName" style="font-family:var(--display);font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;padding-bottom:0;border-bottom:none;"></div>
+<div class="em" id="avatarEmail"></div>
+<button type="button" onclick="auth.signOut()">Logout</button>
         </div>
       </div>
       <button class="btn btn-primary" onclick="openLogin()" id="navLoginBtn">Sign in</button>
@@ -455,7 +456,13 @@
       } else {
         avatarBtn.textContent = letter;
       }
-      document.getElementById('avatarEmail').textContent = user.email;
+      const avatarName = document.getElementById('avatarName');
+
+if (avatarName) {
+  avatarName.textContent = user.displayName || (user.email ? user.email.split('@')[0] : 'Signed in user');
+}
+
+document.getElementById('avatarEmail').textContent = user.email || '';
     } else {
       chip.style.display = 'none';
       loginBtn.style.display = 'inline-block';
@@ -484,7 +491,7 @@
   document.addEventListener('click', e=>{
     const menu = document.getElementById('avatarMenu');
     const btn = document.getElementById('avatarBtn');
-    if(menu && !menu.contains(e.target) && e.target !== btn){
+    if(menu && !menu.contains(e.target) && !btn.contains(e.target)){
       menu.classList.remove('show');
     }
   });
