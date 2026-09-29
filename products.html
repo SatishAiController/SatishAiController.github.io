@@ -34,6 +34,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
   :root{
@@ -209,6 +210,32 @@
   .plan-opt{display:flex; justify-content:space-between; align-items:center; padding:13px 16px; background:var(--panel); border:1px solid var(--border); border-radius:12px; cursor:pointer; font-size:13.5px;}
   .plan-opt.active{border-color:var(--cyan); background:rgba(46,230,255,0.06);}
   .plan-opt b{font-family:var(--mono); color:var(--cyan);}
+    .product-reviews{margin:56px 0 0; background:linear-gradient(150deg,var(--panel),var(--bg2)); border:1px solid var(--border); border-radius:20px; padding:30px;}
+  .review-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:26px;}
+  .review-top .lbl{font-family:var(--mono);font-size:11.5px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .review-top h3{font-family:var(--display);font-size:23px;}
+  .rating-summary{text-align:right;}
+  .rating-number{font-family:var(--display);font-size:30px;font-weight:700;color:var(--text);}
+  .rating-stars{color:#ffc94d;letter-spacing:2px;font-size:17px;margin:3px 0;}
+  .rating-count{font-size:12.5px;color:var(--muted);}
+  .review-form{background:rgba(6,7,20,.38);border:1px solid var(--border-soft);border-radius:14px;padding:20px;margin-bottom:22px;}
+  .review-form h4{font-family:var(--display);font-size:16px;margin-bottom:7px;}
+  .review-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:16px;}
+  .star-picker{display:flex;gap:8px;margin:12px 0 16px;}
+  .rating-star{background:transparent;border:0;color:var(--muted2);font-size:29px;cursor:pointer;padding:0;line-height:1;transition:transform .15s,color .15s;}
+  .rating-star:hover,.rating-star.active{color:#ffc94d;transform:scale(1.12);}
+  .review-textarea{width:100%;min-height:112px;resize:vertical;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font:14px var(--body);line-height:1.55;}
+  .review-textarea:focus{outline:none;border-color:var(--cyan);}
+  .review-form-footer{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-top:12px;}
+  .word-count{font-family:var(--mono);font-size:11.5px;color:var(--muted2);}
+  .review-list{display:flex;flex-direction:column;gap:12px;}
+  .review-card{background:rgba(6,7,20,.3);border:1px solid var(--border-soft);border-radius:13px;padding:17px;}
+  .review-card-top{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:9px;}
+  .review-name{font-family:var(--display);font-size:14px;font-weight:600;}
+  .review-date{font-size:11.5px;color:var(--muted2);}
+  .review-comment{font-size:13.5px;color:var(--muted);line-height:1.65;white-space:pre-wrap;}
+  .review-empty{font-size:13px;color:var(--muted);text-align:center;padding:18px;}
+  @media (max-width:600px){.product-reviews{padding:22px 18px;}.review-top{flex-direction:column;}.rating-summary{text-align:left;}.review-form-footer{align-items:flex-start;flex-direction:column;}}
   ::selection{background:var(--violet); color:#fff;}
 </style>
 </head>
@@ -333,7 +360,50 @@
       </div>
     </div>
 
-    <div class="block-head"><div class="lbl">Process</div><h3>From payment to first hello</h3></div>
+    <div class="product-reviews" id="zyraReviews">
+  <div class="review-top">
+    <div>
+      <div class="lbl">ZYRA community ratings</div>
+      <h3>Rate ZYRA</h3>
+    </div>
+    <div class="rating-summary">
+      <div class="rating-number" id="zyraAverageRating">—</div>
+      <div class="rating-stars" id="zyraAverageStars">★★★★★</div>
+      <div class="rating-count" id="zyraRatingCount">Loading ratings…</div>
+    </div>
+  </div>
+
+  <div class="review-form">
+    <div id="zyraReviewLoggedOut">
+      <h4>Used ZYRA?</h4>
+      <p class="review-note">Sign in with Google to give ZYRA a rating and public comment.</p>
+      <button type="button" class="btn btn-primary" onclick="openLogin()">Sign in to rate ZYRA</button>
+    </div>
+
+    <div id="zyraReviewLoggedIn" hidden>
+      <h4>Your ZYRA rating</h4>
+      <p class="review-note">Your Google display name and comment will be public. You can update your own rating later.</p>
+      <div class="star-picker" id="zyraStarPicker" aria-label="Choose your rating">
+        <button type="button" class="rating-star" data-rating="1" aria-label="1 star">★</button>
+        <button type="button" class="rating-star" data-rating="2" aria-label="2 stars">★</button>
+        <button type="button" class="rating-star" data-rating="3" aria-label="3 stars">★</button>
+        <button type="button" class="rating-star" data-rating="4" aria-label="4 stars">★</button>
+        <button type="button" class="rating-star" data-rating="5" aria-label="5 stars">★</button>
+      </div>
+      <textarea id="zyraReviewComment" class="review-textarea" maxlength="2500" placeholder="Write your experience with ZYRA…"></textarea>
+      <div class="review-form-footer">
+        <span class="word-count" id="zyraWordCount">0 / 200 words</span>
+        <button type="button" class="btn btn-primary" id="zyraReviewSubmit">Publish rating</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-list" id="zyraReviewList">
+    <p class="review-empty">Loading ratings…</p>
+  </div>
+</div>
+
+<div class="block-head"><div class="lbl">Process</div><h3>From payment to first hello</h3></div>
     <div class="steps">
       <div class="step"><span class="num">01</span><h4>Choose a plan</h4><p>Pick the app, the key, or the bundle.</p></div>
       <div class="step"><span class="num">02</span><h4>Sign in &amp; pay</h4><p>Sign in securely with Google, then pay by UPI, card or QR through Razorpay. We never see or store your payment details.</p></div>
@@ -439,7 +509,12 @@
     appId: "1:1013512323964:web:265c09b4b3dc75bcdbdaf9"
   };
   firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err=>{
+  console.warn('Sign-in persistence is unavailable:', err);
+});
 
   const SALE_END_DATE = new Date("2026-10-31T23:59:59");
   function updateSaleTimer(){
@@ -492,6 +567,7 @@ document.getElementById('avatarEmail').textContent = user.email || '';
       loginBtn.style.display = 'inline-block';
       document.getElementById('avatarMenu').classList.remove('show');
     }
+      updateZyraReviewForm();
   });
 
   function openLogin(){ document.getElementById('loginModal').classList.add('show'); }
@@ -594,6 +670,200 @@ Mobile: ${mobile}`;
       body: JSON.stringify({ text })
     }).catch(()=>{});
   }
+
+    // ---------- ZYRA RATINGS ----------
+  const ZYRA_PRODUCT_ID = 'zyra-ai-voice-assistant';
+  let selectedZyraRating = 0;
+  let zyraReviews = [];
+  let reviewFormInitialisedForUid = null;
+
+  function zyraReviewsRef(){
+    return db.collection('products').doc(ZYRA_PRODUCT_ID).collection('reviews');
+  }
+
+  function reviewStars(rating){
+    const safeRating = Math.max(0, Math.min(5, Number(rating) || 0));
+    return '★'.repeat(safeRating) + '☆'.repeat(5 - safeRating);
+  }
+
+  function escapeReviewText(value){
+    return String(value || '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+    })[char]);
+  }
+
+  function wordCount(text){
+    const clean = text.trim();
+    return clean ? clean.split(/\s+/).length : 0;
+  }
+
+  function updateZyraWordCount(){
+    const textarea = document.getElementById('zyraReviewComment');
+    const countEl = document.getElementById('zyraWordCount');
+    if(!textarea || !countEl) return;
+
+    const count = wordCount(textarea.value);
+    countEl.textContent = `${count} / 200 words`;
+    countEl.style.color = count > 200 ? 'var(--magenta)' : 'var(--muted2)';
+  }
+
+  function updateZyraStars(){
+    document.querySelectorAll('#zyraStarPicker .rating-star').forEach(star=>{
+      star.classList.toggle('active', Number(star.dataset.rating) <= selectedZyraRating);
+    });
+  }
+
+  function updateZyraReviewForm(){
+    const loggedOut = document.getElementById('zyraReviewLoggedOut');
+    const loggedIn = document.getElementById('zyraReviewLoggedIn');
+    const textarea = document.getElementById('zyraReviewComment');
+    const submitBtn = document.getElementById('zyraReviewSubmit');
+
+    if(!loggedOut || !loggedIn || !textarea || !submitBtn) return;
+
+    loggedOut.hidden = Boolean(currentUser);
+    loggedIn.hidden = !currentUser;
+
+    if(!currentUser){
+      reviewFormInitialisedForUid = null;
+      return;
+    }
+
+    const ownReview = zyraReviews.find(review => review.userId === currentUser.uid);
+
+    if(reviewFormInitialisedForUid !== currentUser.uid){
+      selectedZyraRating = ownReview ? Number(ownReview.rating) : 0;
+      textarea.value = ownReview ? (ownReview.comment || '') : '';
+      reviewFormInitialisedForUid = currentUser.uid;
+    }
+
+    submitBtn.textContent = ownReview ? 'Update rating' : 'Publish rating';
+    updateZyraStars();
+    updateZyraWordCount();
+  }
+
+  function formatReviewDate(timestamp){
+    if(!timestamp || typeof timestamp.toDate !== 'function') return 'Just now';
+    return timestamp.toDate().toLocaleDateString('en-IN', {
+      day:'numeric', month:'short', year:'numeric'
+    });
+  }
+
+  function renderZyraReviews(){
+    const averageEl = document.getElementById('zyraAverageRating');
+    const starsEl = document.getElementById('zyraAverageStars');
+    const countEl = document.getElementById('zyraRatingCount');
+    const listEl = document.getElementById('zyraReviewList');
+
+    if(!averageEl || !starsEl || !countEl || !listEl) return;
+
+    if(!zyraReviews.length){
+      averageEl.textContent = '—';
+      starsEl.textContent = '☆☆☆☆☆';
+      countEl.textContent = 'No ratings yet';
+      listEl.innerHTML = '<p class="review-empty">Be the first person to rate ZYRA.</p>';
+      return;
+    }
+
+    const average = zyraReviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / zyraReviews.length;
+    averageEl.textContent = `${average.toFixed(1)} / 5`;
+    starsEl.textContent = reviewStars(Math.round(average));
+    countEl.textContent = `${zyraReviews.length} ${zyraReviews.length === 1 ? 'rating' : 'ratings'}`;
+
+    listEl.innerHTML = zyraReviews.map(review => {
+      const rating = Math.max(1, Math.min(5, Number(review.rating) || 1));
+      return `
+        <article class="review-card">
+          <div class="review-card-top">
+            <div>
+              <div class="review-name">${escapeReviewText(review.name)}</div>
+              <div class="rating-stars">${reviewStars(rating)}</div>
+            </div>
+            <div class="review-date">${formatReviewDate(review.updatedAt || review.createdAt)}</div>
+          </div>
+          <p class="review-comment">${escapeReviewText(review.comment)}</p>
+        </article>
+      `;
+    }).join('');
+  }
+
+  async function submitZyraReview(){
+    if(!currentUser){
+      openLogin();
+      return;
+    }
+
+    const textarea = document.getElementById('zyraReviewComment');
+    const submitBtn = document.getElementById('zyraReviewSubmit');
+    const comment = textarea.value.trim();
+    const words = wordCount(comment);
+
+    if(selectedZyraRating < 1){
+      alert('Please choose a star rating.');
+      return;
+    }
+
+    if(words < 1){
+      alert('Please write a comment before publishing.');
+      return;
+    }
+
+    if(words > 200){
+      alert('Your comment must be 200 words or fewer.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving…';
+
+    try{
+      const ref = zyraReviewsRef().doc(currentUser.uid);
+      const existing = await ref.get();
+
+      if(existing.exists){
+        await ref.update({
+          rating: selectedZyraRating,
+          comment: comment,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } else {
+        await ref.set({
+          userId: currentUser.uid,
+          name: (currentUser.displayName || 'Signed-in user').trim().slice(0, 80),
+          rating: selectedZyraRating,
+          comment: comment,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+    } catch(error){
+      console.error(error);
+      alert('Rating could not be saved. Please try again.');
+    } finally {
+      submitBtn.disabled = false;
+      updateZyraReviewForm();
+    }
+  }
+
+  document.querySelectorAll('#zyraStarPicker .rating-star').forEach(star=>{
+    star.addEventListener('click', ()=>{
+      selectedZyraRating = Number(star.dataset.rating);
+      updateZyraStars();
+    });
+  });
+
+  document.getElementById('zyraReviewComment').addEventListener('input', updateZyraWordCount);
+  document.getElementById('zyraReviewSubmit').addEventListener('click', submitZyraReview);
+
+  zyraReviewsRef().orderBy('updatedAt', 'desc').onSnapshot(snapshot=>{
+    zyraReviews = snapshot.docs.map(doc => ({ id:doc.id, ...doc.data() }));
+    renderZyraReviews();
+    updateZyraReviewForm();
+  }, error=>{
+    console.error(error);
+    document.getElementById('zyraReviewList').innerHTML =
+      '<p class="review-empty">Ratings are temporarily unavailable.</p>';
+  });
 
   // ---------- Accordions ----------
   document.querySelectorAll('.acc-head').forEach(head=>{
