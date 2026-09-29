@@ -226,12 +226,13 @@
     </div>
         <div class="nav-cta">
       <div id="navUserChip">
-        <div class="avatar-btn" id="avatarBtn" onclick="toggleAvatarMenu()"></div>
-        <div class="avatar-menu" id="avatarMenu">
-          <div class="em" id="avatarEmail"></div>
-          <button onclick="auth.signOut()">Sign out</button>
-        </div>
-      </div>
+  <div class="avatar-btn" id="avatarBtn" onclick="toggleAvatarMenu()"></div>
+  <div class="avatar-menu" id="avatarMenu">
+    <div class="em" id="avatarName" style="font-family:var(--display);font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;padding-bottom:0;border-bottom:none;"></div>
+    <div class="em" id="avatarEmail"></div>
+    <button type="button" onclick="auth.signOut()">Logout</button>
+  </div>
+</div>
       <button class="btn btn-primary" onclick="openLogin()" id="navLoginBtn">Sign in</button>
     </div>
   </div>
@@ -481,7 +482,11 @@
       } else {
         avatarBtn.textContent = letter;
       }
-      document.getElementById('avatarEmail').textContent = user.email;
+      const avatarName = document.getElementById('avatarName');
+if (avatarName) {
+  avatarName.textContent = user.displayName || (user.email ? user.email.split('@')[0] : 'Signed in user');
+}
+document.getElementById('avatarEmail').textContent = user.email || '';
     } else {
       chip.style.display = 'none';
       loginBtn.style.display = 'inline-block';
@@ -623,7 +628,7 @@ Mobile: ${mobile}`;
   document.addEventListener('click', e=>{
     const menu = document.getElementById('avatarMenu');
     const btn = document.getElementById('avatarBtn');
-    if(menu && !menu.contains(e.target) && e.target !== btn){
+    if(menu && btn && !menu.contains(e.target) && !btn.contains(e.target)){
       menu.classList.remove('show');
     }
   });
