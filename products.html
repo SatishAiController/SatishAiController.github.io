@@ -567,7 +567,8 @@ document.getElementById('avatarEmail').textContent = user.email || '';
       loginBtn.style.display = 'inline-block';
       document.getElementById('avatarMenu').classList.remove('show');
     }
-      updateZyraReviewForm();
+          updateZyraReviewForm();
+    renderZyraReviews();
   });
 
   function openLogin(){ document.getElementById('loginModal').classList.add('show'); }
