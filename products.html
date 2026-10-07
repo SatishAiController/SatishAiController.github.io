@@ -289,9 +289,12 @@
           <span class="badge plat">WINDOWS 10 / 11</span>
           <span class="badge ver">v1.1.0</span>
         </div>
-        <h2><span class="grad">ZYRA</span></h2>
         <div class="prod-tagline">AI Voice Assistant · Desktop</div>
-        <p class="desc">Talk to your computer the way you'd talk to a person. ZYRA listens, watches your screen when you allow it, and takes action — opening apps, finding files, running tasks — while holding a natural, interruptible conversation.</p>
+<div id="zyraHeroRating" hidden style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:13px;">
+  <span id="zyraHeroStars" style="color:#ffc94d;letter-spacing:2px;">★★★★★</span>
+  <a href="#zyraReviews" id="zyraHeroRatingText" style="color:var(--cyan);text-decoration:none;"></a>
+</div>
+<p class="desc">Talk to your computer the way you'd talk to a person. ZYRA listens, watches your screen when you allow it, and takes action — opening apps, finding files, running tasks — while holding a natural, interruptible conversation.</p>
         <div class="prod-cta-row">
           <button class="btn btn-primary" onclick="scrollTo_('zyra-pricing')">Buy ZYRA — from ₹49</button>
           <a href="#zyra-setup" class="btn btn-ghost">Setup guide</a>
@@ -765,6 +768,25 @@ Mobile: ${mobile}`;
     });
   }
 
+  function updateZyraHeroRating(){
+  const badge = document.getElementById('zyraHeroRating');
+  const stars = document.getElementById('zyraHeroStars');
+  const text = document.getElementById('zyraHeroRatingText');
+
+  if(!badge || !stars || !text) return;
+
+  if(!zyraReviews.length){
+    badge.hidden = true;
+    return;
+  }
+
+  const average = zyraReviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / zyraReviews.length;
+
+  badge.hidden = false;
+  stars.textContent = reviewStars(Math.round(average));
+  text.textContent = `${average.toFixed(1)} · ${zyraReviews.length} ${zyraReviews.length === 1 ? 'rating' : 'ratings'}`;
+}
+
   function toggleZyraReviews(){
   zyraReviewsExpanded = !zyraReviewsExpanded;
   renderZyraReviews();
@@ -923,7 +945,8 @@ function renderZyraReviews(){
   zyraReviewsRef().orderBy('updatedAt', 'desc').onSnapshot(snapshot=>{
     zyraReviews = snapshot.docs.map(doc => ({ id:doc.id, ...doc.data() }));
     renderZyraReviews();
-    updateZyraReviewForm();
+updateZyraHeroRating();
+updateZyraReviewForm();
   }, error=>{
     console.error(error);
     document.getElementById('zyraReviewList').innerHTML =
