@@ -676,6 +676,9 @@ Mobile: ${mobile}`;
   let selectedZyraRating = 0;
   let zyraReviews = [];
   let reviewFormInitialisedForUid = null;
+  let zyraReviewsExpanded = false;
+  let editingZyraReview = false;
+  const ZYRA_REVIEW_PREVIEW_COUNT = 3;
 
   function zyraReviewsRef(){
     return db.collection('products').doc(ZYRA_PRODUCT_ID).collection('reviews');
@@ -714,33 +717,45 @@ Mobile: ${mobile}`;
   }
 
   function updateZyraReviewForm(){
-    const loggedOut = document.getElementById('zyraReviewLoggedOut');
-    const loggedIn = document.getElementById('zyraReviewLoggedIn');
-    const textarea = document.getElementById('zyraReviewComment');
-    const submitBtn = document.getElementById('zyraReviewSubmit');
+  const loggedOut = document.getElementById('zyraReviewLoggedOut');
+  const loggedIn = document.getElementById('zyraReviewLoggedIn');
+  const textarea = document.getElementById('zyraReviewComment');
+  const submitBtn = document.getElementById('zyraReviewSubmit');
 
-    if(!loggedOut || !loggedIn || !textarea || !submitBtn) return;
+  if(!loggedOut || !loggedIn || !textarea || !submitBtn) return;
 
-    loggedOut.hidden = Boolean(currentUser);
-    loggedIn.hidden = !currentUser;
+  const reviewBox = loggedIn.parentElement;
 
-    if(!currentUser){
-      reviewFormInitialisedForUid = null;
-      return;
-    }
-
-    const ownReview = zyraReviews.find(review => review.userId === currentUser.uid);
-
-    if(reviewFormInitialisedForUid !== currentUser.uid){
-      selectedZyraRating = ownReview ? Number(ownReview.rating) : 0;
-      textarea.value = ownReview ? (ownReview.comment || '') : '';
-      reviewFormInitialisedForUid = currentUser.uid;
-    }
-
-    submitBtn.textContent = ownReview ? 'Update rating' : 'Publish rating';
-    updateZyraStars();
-    updateZyraWordCount();
+  if(!currentUser){
+    reviewBox.hidden = false;
+    loggedOut.hidden = false;
+    loggedIn.hidden = true;
+    reviewFormInitialisedForUid = null;
+    editingZyraReview = false;
+    return;
   }
+
+  const ownReview = zyraReviews.find(review => review.userId === currentUser.uid);
+
+  if(ownReview && !editingZyraReview){
+    reviewBox.hidden = true;
+    return;
+  }
+
+  reviewBox.hidden = false;
+  loggedOut.hidden = true;
+  loggedIn.hidden = false;
+
+  if(reviewFormInitialisedForUid !== currentUser.uid){
+    selectedZyraRating = ownReview ? Number(ownReview.rating) : 0;
+    textarea.value = ownReview ? (ownReview.comment || '') : '';
+    reviewFormInitialisedForUid = currentUser.uid;
+  }
+
+  submitBtn.textContent = ownReview ? 'Update rating' : 'Publish rating';
+  updateZyraStars();
+  updateZyraWordCount();
+}
 
   function formatReviewDate(timestamp){
     if(!timestamp || typeof timestamp.toDate !== 'function') return 'Just now';
@@ -749,43 +764,91 @@ Mobile: ${mobile}`;
     });
   }
 
-  function renderZyraReviews(){
-    const averageEl = document.getElementById('zyraAverageRating');
-    const starsEl = document.getElementById('zyraAverageStars');
-    const countEl = document.getElementById('zyraRatingCount');
-    const listEl = document.getElementById('zyraReviewList');
+  function toggleZyraReviews(){
+  zyraReviewsExpanded = !zyraReviewsExpanded;
+  renderZyraReviews();
+}
 
-    if(!averageEl || !starsEl || !countEl || !listEl) return;
+function editZyraReview(){
+  if(!currentUser) return;
 
-    if(!zyraReviews.length){
-      averageEl.textContent = '—';
-      starsEl.textContent = '☆☆☆☆☆';
-      countEl.textContent = 'No ratings yet';
-      listEl.innerHTML = '<p class="review-empty">Be the first person to rate ZYRA.</p>';
-      return;
-    }
+  const ownReview = zyraReviews.find(review => review.userId === currentUser.uid);
+  if(!ownReview) return;
 
-    const average = zyraReviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / zyraReviews.length;
-    averageEl.textContent = `${average.toFixed(1)} / 5`;
-    starsEl.textContent = reviewStars(Math.round(average));
-    countEl.textContent = `${zyraReviews.length} ${zyraReviews.length === 1 ? 'rating' : 'ratings'}`;
+  editingZyraReview = true;
+  reviewFormInitialisedForUid = null;
+  updateZyraReviewForm();
 
-    listEl.innerHTML = zyraReviews.map(review => {
-      const rating = Math.max(1, Math.min(5, Number(review.rating) || 1));
-      return `
-        <article class="review-card">
-          <div class="review-card-top">
-            <div>
-              <div class="review-name">${escapeReviewText(review.name)}</div>
-              <div class="rating-stars">${reviewStars(rating)}</div>
-            </div>
-            <div class="review-date">${formatReviewDate(review.updatedAt || review.createdAt)}</div>
-          </div>
-          <p class="review-comment">${escapeReviewText(review.comment)}</p>
-        </article>
-      `;
-    }).join('');
+  const reviewBox = document.querySelector('#zyraReviews .review-form');
+  if(reviewBox){
+    reviewBox.scrollIntoView({behavior:'smooth', block:'center'});
   }
+}
+
+function visibleZyraReviews(){
+  if(zyraReviewsExpanded) return zyraReviews;
+
+  let preview = zyraReviews.slice(0, ZYRA_REVIEW_PREVIEW_COUNT);
+  const ownReview = currentUser && zyraReviews.find(review => review.userId === currentUser.uid);
+
+  if(ownReview && !preview.some(review => review.userId === ownReview.userId)){
+    preview = preview.slice(0, ZYRA_REVIEW_PREVIEW_COUNT - 1);
+    preview.push(ownReview);
+  }
+
+  return preview;
+}
+
+function renderZyraReviews(){
+  const averageEl = document.getElementById('zyraAverageRating');
+  const starsEl = document.getElementById('zyraAverageStars');
+  const countEl = document.getElementById('zyraRatingCount');
+  const listEl = document.getElementById('zyraReviewList');
+
+  if(!averageEl || !starsEl || !countEl || !listEl) return;
+
+  if(!zyraReviews.length){
+    averageEl.textContent = '—';
+    starsEl.textContent = '☆☆☆☆☆';
+    countEl.textContent = 'No ratings yet';
+    listEl.innerHTML = '<p class="review-empty">Be the first person to rate ZYRA.</p>';
+    return;
+  }
+
+  const average = zyraReviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / zyraReviews.length;
+  averageEl.textContent = `${average.toFixed(1)} / 5`;
+  starsEl.textContent = reviewStars(Math.round(average));
+  countEl.textContent = `${zyraReviews.length} ${zyraReviews.length === 1 ? 'rating' : 'ratings'}`;
+
+  const reviewsToShow = visibleZyraReviews();
+
+  listEl.innerHTML = reviewsToShow.map(review => {
+    const rating = Math.max(1, Math.min(5, Number(review.rating) || 1));
+    const isOwnReview = currentUser && review.userId === currentUser.uid;
+
+    return `
+      <article class="review-card">
+        <div class="review-card-top">
+          <div>
+            <div class="review-name">${escapeReviewText(review.name)}</div>
+            <div class="rating-stars">${reviewStars(rating)}</div>
+          </div>
+          <div class="review-date">${formatReviewDate(review.updatedAt || review.createdAt)}</div>
+        </div>
+        <p class="review-comment">${escapeReviewText(review.comment)}</p>
+        ${isOwnReview ? '<button type="button" class="btn btn-ghost" style="padding:7px 12px;font-size:12px;margin-top:12px;" onclick="editZyraReview()">Edit your rating</button>' : ''}
+      </article>
+    `;
+  }).join('');
+
+  if(zyraReviews.length > ZYRA_REVIEW_PREVIEW_COUNT){
+    listEl.innerHTML += `
+      <button type="button" class="btn btn-ghost" style="align-self:center;margin-top:5px;" onclick="toggleZyraReviews()">
+        ${zyraReviewsExpanded ? 'Show fewer ratings' : `View all ${zyraReviews.length} ratings`}
+      </button>
+    `;
+  }
+}
 
   async function submitZyraReview(){
     if(!currentUser){
@@ -840,9 +903,10 @@ Mobile: ${mobile}`;
       console.error(error);
       alert('Rating could not be saved. Please try again.');
     } finally {
-      submitBtn.disabled = false;
-      updateZyraReviewForm();
-    }
+  submitBtn.disabled = false;
+  editingZyraReview = false;
+  reviewFormInitialisedForUid = null;
+}
   }
 
   document.querySelectorAll('#zyraStarPicker .rating-star').forEach(star=>{
