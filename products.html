@@ -290,7 +290,7 @@
           <span class="badge ver">v1.1.0</span>
         </div>
         <div class="prod-tagline">AI Voice Assistant · Desktop</div>
-<div id="zyraHeroRating" hidden style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:13px;">
+<div id="zyraHeroRating" hidden style="align-items:center;gap:8px;margin-bottom:16px;font-size:13px;">
   <span id="zyraHeroStars" style="color:#ffc94d;letter-spacing:2px;">★★★★★</span>
   <a href="#zyraReviews" id="zyraHeroRatingText" style="color:var(--cyan);text-decoration:none;"></a>
 </div>
@@ -776,13 +776,15 @@ Mobile: ${mobile}`;
   if(!badge || !stars || !text) return;
 
   if(!zyraReviews.length){
-    badge.hidden = true;
-    return;
-  }
+  badge.hidden = true;
+  badge.style.display = 'none';
+  return;
+}
 
   const average = zyraReviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / zyraReviews.length;
 
   badge.hidden = false;
+  badge.style.display = 'flex';
   stars.textContent = reviewStars(Math.round(average));
   text.textContent = `${average.toFixed(1)} · ${zyraReviews.length} ${zyraReviews.length === 1 ? 'rating' : 'ratings'}`;
 }
