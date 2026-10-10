@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos — SatishAiController (SAC)</title>
+<meta name="description" content="Watch the latest ZYRA AI Assistant and SatishAiController videos on YouTube.">
+<link rel="canonical" href="https://satishaicontroller.github.io/videos.html">
+<meta property="og:title" content="Videos — SatishAiController (SAC)">
+<meta property="og:description" content="Latest ZYRA AI Assistant videos from SatishAiController.">
+<meta property="og:url" content="https://satishaicontroller.github.io/videos.html">
+<meta property="og:image" content="https://satishaicontroller.github.io/sac-logo.png">
+<link rel="icon" type="image/png" href="sac-logo.png">
+<link rel="apple-touch-icon" href="sac-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#060714; --bg2:#0b0f26; --panel:#0e1330; --border:rgba(139,150,214,.16);
+    --cyan:#2ee6ff; --magenta:#ff3da8; --violet:#8b5cff; --mint:#37ffb4;
+    --text:#eceffd; --muted:#8791c4; --muted2:#5d6699;
+    --display:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden}
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:
+      radial-gradient(ellipse 800px 460px at 8% -10%,rgba(139,92,255,.21),transparent 60%),
+      radial-gradient(ellipse 740px 520px at 95% 8%,rgba(46,230,255,.13),transparent 60%),
+      radial-gradient(ellipse 780px 560px at 50% 110%,rgba(255,61,168,.10),transparent 60%);
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  nav{position:sticky;top:0;z-index:10;background:rgba(6,7,20,.78);backdrop-filter:blur(16px);border-bottom:1px solid rgba(139,150,214,.08)}
+  nav .wrap{height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);font-family:var(--display);font-size:17px;font-weight:700}
+  .brand img{width:36px;height:36px;border-radius:10px;box-shadow:0 0 20px rgba(139,92,255,.45)}
+  .sac{font-family:var(--mono);font-size:10px;color:var(--cyan);border:1px solid rgba(46,230,255,.3);padding:3px 7px;border-radius:6px;letter-spacing:1.4px}
+  .navlinks{display:flex;gap:25px;align-items:center}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+  .navlinks a:hover,.navlinks a.active{color:var(--cyan)}
+
+  .hero{padding:78px 0 42px;text-align:center}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:15px}
+  h1{font-family:var(--display);font-size:clamp(34px,5vw,54px);letter-spacing:-1px;margin-bottom:15px}
+  .grad{background:linear-gradient(100deg,var(--cyan),var(--violet),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:15.5px;line-height:1.7}
+
+  .channel-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:linear-gradient(130deg,var(--panel),var(--bg2));border:1px solid var(--border);border-radius:18px;padding:18px 20px;margin:10px 0 34px}
+  .channel-info{display:flex;align-items:center;gap:13px}
+  .yt-mark{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,61,61,.14);color:#ff5151;font-size:20px}
+  .channel-info b{font-family:var(--display);display:block;font-size:15px;margin-bottom:3px}
+  .channel-info span{font-size:12.5px;color:var(--muted)}
+  .btn{display:inline-block;text-decoration:none;font-family:var(--body);font-size:13px;font-weight:700;border-radius:10px;padding:11px 16px;cursor:pointer;border:1px solid var(--border)}
+  .btn-primary{background:linear-gradient(120deg,var(--cyan),var(--violet));color:#050611;border:none}
+  .btn-ghost{background:transparent;color:var(--text)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:38px 0 20px}
+  .section-head h2{font-family:var(--display);font-size:25px}
+  .section-head p{font-size:13px;color:var(--muted);margin-top:6px}
+
+  .video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;padding-bottom:72px}
+  .video-card{width:100%;text-align:left;color:var(--text);font-family:var(--body);background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+  .video-card:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 18px 40px rgba(0,0,0,.28)}
+  .thumb{position:relative;aspect-ratio:16/9;background:#080a18;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:37px;border-radius:10px;display:grid;place-items:center;background:#ff3838;color:#fff;font-size:16px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+  .video-copy{padding:15px}
+  .video-copy h3{font-family:var(--display);font-size:15px;line-height:1.35;margin-bottom:8px}
+  .video-copy p{font-size:12px;color:var(--muted);line-height:1.5}
+  .video-date{font-family:var(--mono);font-size:10px;color:var(--muted2);margin-top:12px;text-transform:uppercase;letter-spacing:.5px}
+
+  .loading,.error-box{grid-column:1/-1;text-align:center;padding:52px 20px;color:var(--muted);background:var(--panel);border:1px dashed var(--border);border-radius:16px}
+  .spinner{width:28px;height:28px;border:3px solid rgba(46,230,255,.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .player-bg{position:fixed;inset:0;background:rgba(4,5,14,.82);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:30}
+  .player-bg.show{display:flex}
+  .player{width:min(900px,100%);background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:16px;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.65)}
+  .player-close{position:absolute;right:12px;top:-46px;background:transparent;border:0;color:#fff;font-size:30px;cursor:pointer}
+  .player-frame{aspect-ratio:16/9;background:#000;border-radius:11px;overflow:hidden}
+  .player-frame iframe{width:100%;height:100%;border:0}
+  .player-actions{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 4px 2px}
+  .player-actions p{font-family:var(--display);font-size:14px}
+  .player-actions a{white-space:nowrap}
+
+  footer{border-top:1px solid rgba(139,150,214,.08);padding:32px 0}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;align-items:center}
+  footer p,footer a{font-size:13px;color:var(--muted2);text-decoration:none}
+
+  @media(max-width:800px){
+    .video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .navlinks{display:none}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}
+    nav .wrap{height:66px}
+    .brand span:not(.sac){display:none}
+    .hero{padding:55px 0 30px}
+    .channel-bar{align-items:flex-start;flex-direction:column}
+    .video-grid{grid-template-columns:1fr}
+    .section-head{display:block}
+    .section-head p{margin-bottom:15px}
+    .player-actions{align-items:flex-start;flex-direction:column}
+    footer .wrap{align-items:flex-start;flex-direction:column}
+  }
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="sac-logo.png" alt="SatishAiController logo">
+      <span>SatishAiController</span>
+      <span class="sac">SAC</span>
+    </a>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a class="active" href="videos.html">Videos</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">SatishAiController on YouTube</div>
+    <h1>Latest <span class="grad">ZYRA videos</span></h1>
+    <p>New uploads appear here automatically. Watch a preview on this page, then open YouTube to like, comment, share, or subscribe.</p>
+  </section>
+
+  <section class="channel-bar">
+    <div class="channel-info">
+      <div class="yt-mark">▶</div>
+      <div>
+        <b>SatishAiController</b>
+        <span>Official YouTube channel</span>
+      </div>
+    </div>
+
+    <a class="btn btn-primary" href="https://www.youtube.com/@SatishAiControler" target="_blank" rel="noopener">
+      Visit YouTube channel ↗
+    </a>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Newest uploads</h2>
+        <p>The five most recent videos from the official channel.</p>
+      </div>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+      <div class="loading">
+        <div class="spinner"></div>
+        Loading latest videos…
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="player-bg" id="playerModal" aria-hidden="true">
+  <div class="player">
+    <button class="player-close" type="button" onclick="closeVideo()" aria-label="Close video">×</button>
+    <div class="player-frame" id="playerFrame"></div>
+    <div class="player-actions">
+      <p id="playerTitle">Video</p>
+      <a class="btn btn-ghost" id="youtubeAction" href="#" target="_blank" rel="noopener">Like &amp; comment on YouTube ↗</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 SatishAiController (SAC). Built in India.</p>
+    <a href="terms.html">Terms &amp; Privacy</a>
+  </div>
+</footer>
+
+<script>
+  const YOUTUBE_CHANNEL_ID = 'UClg5G1lz94LygzotgpIbi6g';
+
+  /* Paste only your restricted YouTube Data API key between the quotes. */
+  const YOUTUBE_API_KEY = 'AIzaSyANQLirPJ61TTM8iEEiW4nUIsNjje-RZYE';
+
+  const videoGrid = document.getElementById('videoGrid');
+
+  function escapeHtml(value){
+    return String(value || '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+    })[char]);
+  }
+
+  function formatDate(value){
+    if(!value) return '';
+    return new Date(value).toLocaleDateString('en-IN',{
+      day:'numeric', month:'short', year:'numeric'
+    });
+  }
+
+  function showError(){
+    videoGrid.innerHTML = `
+      <div class="error-box">
+        Videos could not load right now.<br><br>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@SatishAiControler/videos" target="_blank" rel="noopener">
+          Watch on YouTube ↗
+        </a>
+      </div>
+    `;
+  }
+
+  function openVideo(videoId, title){
+    document.getElementById('playerTitle').textContent = title;
+    document.getElementById('youtubeAction').href = `https://www.youtube.com/watch?v=${videoId}`;
+    document.getElementById('playerFrame').innerHTML =
+      `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0"
+        title="${escapeHtml(title)}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>`;
+
+    document.getElementById('playerModal').classList.add('show');
+    document.getElementById('playerModal').setAttribute('aria-hidden','false');
+  }
+
+  function closeVideo(){
+    document.getElementById('playerFrame').innerHTML = '';
+    document.getElementById('playerModal').classList.remove('show');
+    document.getElementById('playerModal').setAttribute('aria-hidden','true');
+  }
+
+  async function loadLatestVideos(){
+    if(YOUTUBE_API_KEY === 'AIzaSyANQLirPJ61TTM8iEEiW4nUIsNjje-RZYE'){
+      showError();
+      return;
+    }
+
+    try{
+      const channelResponse = await fetch(
+        `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${YOUTUBE_CHANNEL_ID}&key=${YOUTUBE_API_KEY}`
+      );
+
+      if(!channelResponse.ok) throw new Error('Channel request failed');
+
+      const channelData = await channelResponse.json();
+      const uploadsPlaylistId = channelData.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+
+      if(!uploadsPlaylistId) throw new Error('Uploads playlist unavailable');
+
+      const videosResponse = await fetch(
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${uploadsPlaylistId}&maxResults=5&key=${YOUTUBE_API_KEY}`
+      );
+
+      if(!videosResponse.ok) throw new Error('Video request failed');
+
+      const videosData = await videosResponse.json();
+      const videos = (videosData.items || []).filter(item => item.contentDetails?.videoId);
+
+      if(!videos.length) throw new Error('No videos found');
+
+      videoGrid.innerHTML = videos.map(item => {
+        const videoId = item.contentDetails.videoId;
+        const title = item.snippet?.title || 'YouTube video';
+        const description = item.snippet?.description || 'Watch this latest upload from SatishAiController.';
+        const thumbnail =
+          item.snippet?.thumbnails?.high?.url ||
+          item.snippet?.thumbnails?.medium?.url ||
+          item.snippet?.thumbnails?.default?.url ||
+          '';
+
+        return `
+          <button class="video-card" type="button"
+            onclick='openVideo(${JSON.stringify(videoId)}, ${JSON.stringify(title)})'>
+            <div class="thumb">
+              <img src="${escapeHtml(thumbnail)}" alt="${escapeHtml(title)}" loading="lazy">
+              <span class="play">▶</span>
+            </div>
+            <div class="video-copy">
+              <h3>${escapeHtml(title)}</h3>
+              <p>${escapeHtml(description.slice(0,120))}${description.length > 120 ? '…' : ''}</p>
+              <div class="video-date">${formatDate(item.snippet?.publishedAt)}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }catch(error){
+      console.error(error);
+      showError();
+    }
+  }
+
+  document.getElementById('playerModal').addEventListener('click', event => {
+    if(event.target.id === 'playerModal') closeVideo();
+  });
+
+  document.addEventListener('keydown', event => {
+    if(event.key === 'Escape') closeVideo();
+  });
+
+  loadLatestVideos();
+</script>
+</body>
+</html>
