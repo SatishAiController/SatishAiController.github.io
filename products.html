@@ -37,6 +37,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
+  .zyra-demo{margin:54px 0 62px}
+.demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.demo-shot{display:block;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:#050712;text-decoration:none;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.demo-shot:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 16px 36px rgba(0,0,0,.28)}
+.demo-shot img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:#050712}
+.demo-caption{padding:12px 14px;border-top:1px solid var(--border)}
+.demo-caption b{display:block;font-size:14px;color:var(--text);margin-bottom:4px}
+.demo-caption span{display:block;font-size:12px;color:var(--muted)}
+@media(max-width:760px){.demo-grid{grid-template-columns:1fr}.demo-shot img{aspect-ratio:16/9}}
   :root{
     --bg:#060714; --bg2:#0b0f26; --panel:#0e1330; --panel2:#131938;
     --border:rgba(139,150,214,0.16); --border-soft:rgba(139,150,214,0.08);
@@ -303,6 +312,36 @@
       <div class="orb-stage">
         <div class="orb-ring r3"></div><div class="orb-ring r1"></div><div class="orb-ring r2"></div>
         <div class="orb-core"><span>ZYRA</span></div>
+      </div>
+    </div>
+
+        <div class="zyra-demo">
+      <div class="block-head"><div class="lbl">Live preview</div><h3>See ZYRA in action</h3></div>
+
+      <div class="demo-grid">
+        <a class="demo-shot" href="zyra-dashboard.png" target="_blank" rel="noopener">
+          <img src="zyra-dashboard.png" alt="ZYRA desktop control center with voice, screen and tool controls" loading="lazy">
+          <div class="demo-caption">
+            <b>Desktop control center</b>
+            <span>Voice, screen sharing and tool controls</span>
+          </div>
+        </a>
+
+        <a class="demo-shot" href="zyra-login.png" target="_blank" rel="noopener">
+          <img src="zyra-login.png" alt="ZYRA secure desktop login screen" loading="lazy">
+          <div class="demo-caption">
+            <b>Secure sign-in</b>
+            <span>Your personal ZYRA workspace</span>
+          </div>
+        </a>
+
+        <a class="demo-shot" href="zyra-launch.png" target="_blank" rel="noopener">
+          <img src="zyra-launch.png" alt="ZYRA launching in Windows PowerShell" loading="lazy">
+          <div class="demo-caption">
+            <b>Quick Windows launch</b>
+            <span>Start ZYRA directly from your device</span>
+          </div>
+        </a>
       </div>
     </div>
 
